@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Amazon FBA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+
+    <div class="bg-gray-800 shadow-lg rounded-lg p-8 max-w-2xl w-full">
+        <h1 class="text-3xl font-bold text-center text-white mb-8">Black's calculator</h1>
+        <form id="calculatorForm" class="space-y-6">
+            <!-- Inputs en una línea -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <label for="precoVenda" class="text-gray-300 font-medium">Preço de Venda (R$):</label>
+                    <input type="number" id="precoVenda" class="w-1/2 bg-gray-700 border-gray-600 text-white rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-right">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label for="precoCompra" class="text-gray-300 font-medium">Preço de Compra (R$):</label>
+                    <input type="number" id="precoCompra" class="w-1/2 bg-gray-700 border-gray-600 text-white rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-right">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label for="impostoCompra" class="text-gray-300 font-medium">Imposto da Compra (%):</label>
+                    <input type="number" id="impostoCompra" class="w-1/2 bg-gray-700 border-gray-600 text-white rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-right">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label for="impostoVenda" class="text-gray-300 font-medium">Imposto da Venda (%):</label>
+                    <input type="number" id="impostoVenda" class="w-1/2 bg-gray-700 border-gray-600 text-white rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-right">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label for="cupomDesconto" class="text-gray-300 font-medium">Cupom de Desconto (%):</label>
+                    <input type="number" id="cupomDesconto" class="w-1/2 bg-gray-700 border-gray-600 text-white rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-right">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label for="custoEnvio" class="text-gray-300 font-medium">Custo de Envio (R$):</label>
+                    <input type="number" id="custoEnvio" class="w-1/2 bg-gray-700 border-gray-600 text-white rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-right">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label for="outrosCustos" class="text-gray-300 font-medium">Outros Custos (R$):</label>
+                    <input type="number" id="outrosCustos" class="w-1/2 bg-gray-700 border-gray-600 text-white rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-right">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label for="custoArmazenamento" class="text-gray-300 font-medium">Custo de Armazenamento (R$):</label>
+                    <input type="number" id="custoArmazenamento" class="w-1/2 bg-gray-700 border-gray-600 text-white rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 text-right">
+                </div>
+            </div>
+        </form>
+
+        <!-- Comissões FBA e Referal Fee -->
+        <div id="comissoes" class="mt-8 space-y-4">
+            <h3 class="text-xl font-semibold text-gray-300">Comissões</h3>
+            <div id="comissaoFBA" class="p-2 bg-gray-700 text-gray-300 rounded-md"></div>
+            <div id="referalFee" class="p-2 bg-gray-700 text-gray-300 rounded-md"></div>
+        </div>
+
+        <!-- Resultados -->
+        <div id="resultados" class="mt-8 hidden">
+            <div class="flex space-x-4">
+                <div id="lucroBox" class="p-4 rounded-md w-1/3"></div>
+                <div id="margemBox" class="p-4 rounded-md w-1/3"></div>
+                <div id="roiBox" class="p-4 rounded-md w-1/3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('input');
+        const resultadosDiv = document.getElementById('resultados');
+        const lucroBox = document.getElementById('lucroBox');
+        const margemBox = document.getElementById('margemBox');
+        const roiBox = document.getElementById('roiBox');
+        const comissaoFBABox = document.getElementById('comissaoFBA');
+        const referalFeeBox = document.getElementById('referalFee');
+
+        inputs.forEach(input => {
+            input.addEventListener('input', calcularLucro);
+        });
+
+        function calcularLucro() {
+            const precoVenda = parseFloat(document.getElementById('precoVenda').value) || 0;
+            let precoCompra = parseFloat(document.getElementById('precoCompra').value) || 0;
+            const impostoCompra = parseFloat(document.getElementById('impostoCompra').value) || 0;
+            const impostoVenda = parseFloat(document.getElementById('impostoVenda').value) || 0;
+            const cupomDesconto = parseFloat(document.getElementById('cupomDesconto').value) || 0;
+            const custoEnvio = parseFloat(document.getElementById('custoEnvio').value) || 0;
+            const outrosCustos = parseFloat(document.getElementById('outrosCustos').value) || 0;
+            const custoArmazenamento = parseFloat(document.getElementById('custoArmazenamento').value) || 0;
+
+            // Aplicando o cupom de desconto sobre o preço de compra
+            precoCompra -= (precoCompra * cupomDesconto / 100);
+
+            // Cálculos
+            const taxaFBA = precoVenda * 0.14;
+            const referalFee = precoVenda * 0.1333;
+
+            const custosTotais = precoCompra + 
+                                 (precoCompra * impostoCompra / 100) + 
+                                 custoEnvio + 
+                                 outrosCustos + 
+                                 custoArmazenamento + 
+                                 taxaFBA + 
+                                 referalFee + 
+                                 (precoVenda * impostoVenda / 100);
+
+            const lucro = precoVenda - custosTotais;
+            const margem = (lucro / precoVenda) * 100;
+            const roi = (lucro / (precoCompra + (precoCompra * cupomDesconto / 100))) * 100;
+
+            // Mostrar resultados
+            resultadosDiv.classList.remove('hidden');
+            if (lucro >= 0) {
+                lucroBox.className = "p-4 rounded-md bg-green-600 text-green-100";
+                lucroBox.innerHTML = `<p><strong>Lucro:</strong> R$ ${lucro.toFixed(2)}</p>`;
+            } else {
+                lucroBox.className = "p-4 rounded-md bg-red-600 text-red-100";
+                lucroBox.innerHTML = `<p><strong>Prejuízo:</strong> R$ ${lucro.toFixed(2)}</p>`;
+            }
+
+            // Mostrar margem com color change
+            if (margem >= 0) {
+                margemBox.className = "p-4 rounded-md bg-green-500 text-green-100";
+                margemBox.innerHTML = `<p><strong>Margem:</strong> ${margem.toFixed(2)}%</p>`;
+            } else {
+                margemBox.className = "p-4 rounded-md bg-red-500 text-red-100";
+                margemBox.innerHTML = `<p><strong>Margem:</strong> ${margem.toFixed(2)}%</p>`;
+            }
+
+            // Mostrar ROI
+            roiBox.className = "p-4 rounded-md bg-purple-600 text-purple-100";
+            roiBox.innerHTML = `<p><strong>ROI:</strong> ${roi.toFixed(2)}%</p>`;
+
+            // Mostrar comissão FBA
+            comissaoFBABox.innerHTML = `<p><strong>Comissão FBA (14%):</strong> R$ ${taxaFBA.toFixed(2)}</p>`;
+            
+            // Mostrar referal fee
+            referalFeeBox.innerHTML = `<p><strong>Referal Fee (13.33%):</strong> R$ ${referalFee.toFixed(2)}</p>`;
+        }
+    </script>
+</body>
+</html>
