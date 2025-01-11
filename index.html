@@ -63,6 +63,11 @@
                 <div id="roiBox" class="p-4 rounded-md w-1/3"></div>
             </div>
         </div>
+
+        <div class="mt-8 space-y-4">
+            <div id="precoCompraSugerido" class="p-2 bg-gray-700 text-gray-300 rounded-md"></div>
+        </div>
+
     </div>
 
     <script>
@@ -96,17 +101,30 @@
             const referalFee = precoVenda * 0.1333;
 
             const custosTotais = precoCompra + 
-                                 (precoCompra * impostoCompra / 100) + 
-                                 custoEnvio + 
-                                 outrosCustos + 
-                                 custoArmazenamento + 
-                                 taxaFBA + 
-                                 referalFee + 
-                                 (precoVenda * impostoVenda / 100);
+                     (precoCompra * impostoCompra / 100) + 
+                     custoEnvio + 
+                     outrosCustos + 
+                     custoArmazenamento + 
+                     taxaFBA + 
+                     referalFee + 
+                     (precoVenda * impostoVenda / 100);
+            
+            const custosExtras = 
+                custoEnvio + 
+                outrosCustos + 
+                custoArmazenamento + 
+                taxaFBA + 
+                referalFee + 
+                (precoVenda * impostoVenda / 100);
 
             const lucro = precoVenda - custosTotais;
             const margem = (lucro / precoVenda) * 100;
             const roi = (lucro / (precoCompra + (precoCompra * cupomDesconto / 100))) * 100;
+
+            const precoCompraSugerido = precoVenda - (0.2 * precoVenda) - custosExtras;
+
+            const precoCompraSugeridoBox = document.querySelector('#precoCompraSugerido');
+            precoCompraSugeridoBox.innerHTML = 'Preço de compra sugerido: R$ ' + precoCompraSugerido.toFixed(2);
 
             // Mostrar resultados
             resultadosDiv.classList.remove('hidden');
