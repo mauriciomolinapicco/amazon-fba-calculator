@@ -51,8 +51,8 @@
         <!-- Comissões FBA e Referal Fee -->
         <div id="comissoes" class="mt-8 space-y-4">
             <h3 class="text-xl font-semibold text-gray-300">Comissões</h3>
-            <div id="comissaoFBA" class="p-2 bg-gray-700 text-gray-300 rounded-md"></div>
-            <div id="referalFee" class="p-2 bg-gray-700 text-gray-300 rounded-md"></div>
+            <div id="comissaoFBA" class="p-2 bg-gray-700 text-gray-300 rounded-md">Comissão FBA (14%):</div>
+            <div id="referalFee" class="p-2 bg-gray-700 text-gray-300 rounded-md">Referal Fee (13.33%):</div>
         </div>
 
         <!-- Resultados -->
@@ -65,7 +65,9 @@
         </div>
 
         <div class="mt-8 space-y-4">
-            <div id="precoCompraSugerido" class="p-2 bg-gray-700 text-gray-300 rounded-md"></div>
+            <div id="precoCompraSugerido" class="p-2 bg-gray-700 text-gray-300 rounded-md">Preço de compra sugerido: R$ -</div>
+            <div id="precoVendaSugerido" class="p-2 bg-gray-700 text-gray-300 rounded-md">Preço de venda sugerido: R$ -</div>
+            <div id="descontoNecessario" class="p-2 bg-gray-700 text-gray-300 rounded-md">Desconto necessario: -</div>
         </div>
 
     </div>
@@ -121,10 +123,37 @@
             const margem = (lucro / precoVenda) * 100;
             const roi = (lucro / (precoCompra + (precoCompra * cupomDesconto / 100))) * 100;
 
-            const precoCompraSugerido = precoVenda - (0.2 * precoVenda) - custosExtras;
-
+            // preco de compra sugerido
+            const margemDesejada = 0.2; 
+            var precoCompraSugerido = precoVenda - (margemDesejada * precoVenda) - custosExtras;
+            precoCompraSugerido += (precoCompraSugerido * impostoCompra / 100)
             const precoCompraSugeridoBox = document.querySelector('#precoCompraSugerido');
             precoCompraSugeridoBox.innerHTML = 'Preço de compra sugerido: R$ ' + precoCompraSugerido.toFixed(2);
+
+            // preco de venda sugerido
+            const custosTotaisVenda = precoCompra + 
+                     (precoCompra * impostoCompra / 100) + 
+                     custoEnvio + 
+                     outrosCustos + 
+                     custoArmazenamento + 
+                     taxaFBA + 
+                     referalFee
+
+            const precoVendaSugerido = 0;
+            const precoVendaSugeridoBox = document.querySelector('#precoVendaSugerido');
+            precoVendaSugeridoBox.innerHTML = 'Preço de venda sugerido: R$ ' + precoVendaSugerido.toFixed(2);
+
+            
+            //desconto necessario
+            const descontoNecessario = (precoCompra - precoCompraSugerido) * 100 / precoCompra
+            const descontoNecessarioBox = document.querySelector('#descontoNecessario');
+            if (descontoNecessario > 0 && precoVenda) {
+                descontoNecessarioBox.innerHTML = 'Desconto necessario: % ' + descontoNecessario.toFixed(2);
+            } else {
+                descontoNecessarioBox.innerHTML = 'Desconto necessario: % '
+            }
+            
+
 
             // Mostrar resultados
             resultadosDiv.classList.remove('hidden');
