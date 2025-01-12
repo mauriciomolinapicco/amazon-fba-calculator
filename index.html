@@ -6,10 +6,10 @@
     <title>Calculadora Amazon FBA</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center text-sm">
 
     <div class="bg-gray-800 shadow-lg rounded-lg p-8 max-w-2xl w-full">
-        <h1 class="text-3xl font-bold text-center text-white mb-8">Black's calculator</h1>
+        <h1 class="text-2xl font-bold text-center text-white mb-8">Black's calculator</h1>
         <form id="calculatorForm" class="space-y-6">
             <!-- Inputs en una línea -->
             <div class="space-y-4">
@@ -50,24 +50,25 @@
 
         <!-- Comissões FBA e Referal Fee -->
         <div id="comissoes" class="mt-8 space-y-4">
-            <h3 class="text-xl font-semibold text-gray-300">Comissões</h3>
-            <div id="comissaoFBA" class="p-2 bg-gray-700 text-gray-300 rounded-md">Comissão FBA (14%):</div>
-            <div id="referalFee" class="p-2 bg-gray-700 text-gray-300 rounded-md">Referal Fee (13.33%):</div>
+            <h3 class="text-lg font-semibold text-center text-gray-300">Comissões</h3>
+            <div id="comissaoFBA" class="p-1 bg-gray-700 text-gray-300 rounded-md">Comissão FBA (14%):</div>
+            <div id="referalFee" class="p-1 bg-gray-700 text-gray-300 rounded-md">Referal Fee (13.33%):</div>
         </div>
 
         <!-- Resultados -->
-        <div id="resultados" class="mt-8 hidden">
+        <div id="resultados" class="mt-8">
             <div class="flex space-x-4">
-                <div id="lucroBox" class="p-4 rounded-md w-1/3"></div>
-                <div id="margemBox" class="p-4 rounded-md w-1/3"></div>
-                <div id="roiBox" class="p-4 rounded-md w-1/3"></div>
+                <div id="lucroBox" class="p-4 rounded-md w-1/3 bg-green-600 font-bold">Lucro</div>
+                <div id="margemBox" class="p-4 rounded-md w-1/3 bg-green-500 font-bold">Margem</div>
+                <div id="roiBox" class="p-4 rounded-md w-1/3 bg-purple-600 font-bold">ROI</div>
             </div>
         </div>
 
-        <div class="mt-8 space-y-4">
-            <div id="precoCompraSugerido" class="p-2 bg-gray-700 text-gray-300 rounded-md">Preço de compra sugerido: R$ -</div>
-            <div id="precoVendaSugerido" class="p-2 bg-gray-700 text-gray-300 rounded-md">Preço de venda sugerido: R$ -</div>
-            <div id="descontoNecessario" class="p-2 bg-gray-700 text-gray-300 rounded-md">Desconto necessario: -</div>
+        <div class="mt-8 space-y-1">
+            <div id="precoCompraSugerido" class="p-1 bg-gray-700 text-gray-300 rounded-md">Preço de compra sugerido: R$ -</div>
+            <div id="precoVendaSugerido" class="p-1 bg-gray-700 text-gray-300 rounded-md">Preço de venda sugerido: R$ -</div>
+            <div id="descontoNecessario" class="p-1 bg-gray-700 text-gray-300 rounded-md">Desconto necessario: -</div>
+            <div id="precoBreakEven" class="p-1 bg-gray-700 text-gray-300 rounded-md">Desconto necessario: -</div>
         </div>
 
     </div>
@@ -131,32 +132,32 @@
             precoCompraSugeridoBox.innerHTML = 'Preço de compra sugerido: R$ ' + precoCompraSugerido.toFixed(2);
 
             // preco de venda sugerido
-            const custosTotaisVenda = precoCompra + 
-                     (precoCompra * impostoCompra / 100) + 
-                     custoEnvio + 
-                     outrosCustos + 
-                     custoArmazenamento + 
-                     taxaFBA + 
-                     referalFee
-
-            const precoVendaSugerido = 0;
+            const custosTotaisSemVenda = precoCompra +
+                (precoCompra * impostoCompra / 100) +
+                custoEnvio +
+                outrosCustos +
+                custoArmazenamento;
+            // Considerar os custos variáveis relacionados ao preço de venda
+            const precoVendaSugerido = custosTotaisSemVenda / (1 - margemDesejada - 0.14 - 0.1333 - (impostoVenda / 100));
             const precoVendaSugeridoBox = document.querySelector('#precoVendaSugerido');
             precoVendaSugeridoBox.innerHTML = 'Preço de venda sugerido: R$ ' + precoVendaSugerido.toFixed(2);
-
             
+            // Break Even
+            const precoBreakEven = custosTotaisSemVenda / (1 - 0.14 - 0.1333 - (impostoVenda / 100));
+            const precoBreakEvenBox = document.querySelector('#precoBreakEven');
+            precoBreakEvenBox.innerHTML = 'Break Even: R$ ' + precoBreakEven.toFixed(2);
+
+
             //desconto necessario
             const descontoNecessario = (precoCompra - precoCompraSugerido) * 100 / precoCompra
             const descontoNecessarioBox = document.querySelector('#descontoNecessario');
             if (descontoNecessario > 0 && precoVenda) {
-                descontoNecessarioBox.innerHTML = 'Desconto necessario: % ' + descontoNecessario.toFixed(2);
+                descontoNecessarioBox.innerHTML = 'Desconto necessario: %' + descontoNecessario.toFixed(2);
             } else {
                 descontoNecessarioBox.innerHTML = 'Desconto necessario: % '
             }
             
-
-
             // Mostrar resultados
-            resultadosDiv.classList.remove('hidden');
             if (lucro >= 0) {
                 lucroBox.className = "p-4 rounded-md bg-green-600 text-green-100";
                 lucroBox.innerHTML = `<p><strong>Lucro:</strong> R$ ${lucro.toFixed(2)}</p>`;
