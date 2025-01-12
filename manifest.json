@@ -1,0 +1,17 @@
+{
+    "name": "Amazon FBA Calculator",
+    "version": "1.0.0",
+    "description": "Amazon FBA Calculator",
+    "manifest_version": 3,
+    "author": "Mauricio Molina",
+    "action": {
+        "default_popup": "./src/index.html",
+        "default_title": "Amazon FBA Calculator"
+    },
+    "web_accessible_resources": [
+        {
+          "resources": ["dist/output.css"],
+          "matches": ["<all_urls>"]
+        }
+      ]  
+}
