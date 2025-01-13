@@ -19,6 +19,7 @@ function calcularLucro() {
     const custoEnvio = parseFloat(document.getElementById('custoEnvio').value) || 0;
     const outrosCustos = parseFloat(document.getElementById('outrosCustos').value) || 0;
     const custoArmazenamento = parseFloat(document.getElementById('custoArmazenamento').value) || 0;
+    const quantidadeCompra = parseFloat(document.getElementById('quantidadeCompra').value) || 1;
 
     // Aplicando o cupom de desconto sobre o preço de compra
     precoCompra -= (precoCompra * cupomDesconto / 100);
@@ -53,7 +54,7 @@ function calcularLucro() {
     var precoCompraSugerido = precoVenda - (margemDesejada * precoVenda) - custosExtras;
     precoCompraSugerido += (precoCompraSugerido * impostoCompra / 100)
     const precoCompraSugeridoBox = document.querySelector('#precoCompraSugerido');
-    precoCompraSugeridoBox.innerHTML = 'Preço de compra sugerido: R$ ' + precoCompraSugerido.toFixed(2);
+    precoCompraSugeridoBox.innerHTML = 'R$ ' + precoCompraSugerido.toFixed(2);
 
     // preco de venda sugerido
     const custosTotaisSemVenda = precoCompra +
@@ -64,41 +65,48 @@ function calcularLucro() {
     // Considerar os custos variáveis relacionados ao preço de venda
     const precoVendaSugerido = custosTotaisSemVenda / (1 - margemDesejada - 0.14 - 0.1333 - (impostoVenda / 100));
     const precoVendaSugeridoBox = document.querySelector('#precoVendaSugerido');
-    precoVendaSugeridoBox.innerHTML = 'Preço de venda sugerido: R$ ' + precoVendaSugerido.toFixed(2);
+    precoVendaSugeridoBox.innerHTML = 'R$ ' + precoVendaSugerido.toFixed(2);
     
     // Break Even
     const precoBreakEven = custosTotaisSemVenda / (1 - 0.14 - 0.1333 - (impostoVenda / 100));
     const precoBreakEvenBox = document.querySelector('#precoBreakEven');
-    precoBreakEvenBox.innerHTML = 'Break Even: R$ ' + precoBreakEven.toFixed(2);
+    precoBreakEvenBox.innerHTML = 'R$ ' + precoBreakEven.toFixed(2);
 
+    //Investimento
+    const investimento = custosTotais * quantidadeCompra;
+    document.getElementById('investimento').innerHTML = investimento.toFixed(2);
 
     //desconto necessario
     const descontoNecessario = (precoCompra - precoCompraSugerido) * 100 / precoCompra
     const descontoNecessarioBox = document.querySelector('#descontoNecessario');
     if (descontoNecessario > 0 && precoVenda) {
-        descontoNecessarioBox.innerHTML = 'Desconto necessario: %' + descontoNecessario.toFixed(2);
+        descontoNecessarioBox.innerHTML = descontoNecessario.toFixed(2) + ' %'
     } else {
-        descontoNecessarioBox.innerHTML = 'Desconto necessario: % '
+        descontoNecessarioBox.innerHTML = '-'
     }
     
     // Mostrar resultados
     if (lucro >= 0) {
         lucroBox.className = "p-4 rounded-md bg-green-600 text-green-100";
-        lucroBox.innerHTML = `<p><strong>Lucro:</strong> R$ ${lucro.toFixed(2)}</p>`;
+        lucroBox.innerHTML = `<p><strong>Lucro:</strong> +R$${lucro.toFixed(2)}</p>`;
     } else {
         lucroBox.className = "p-4 rounded-md bg-red-600 text-red-100";
-        lucroBox.innerHTML = `<p><strong>Prejuízo:</strong> R$ ${lucro.toFixed(2)}</p>`;
+        lucroBox.innerHTML = `<p><strong>Prejuízo:</strong> R$${lucro.toFixed(2)}</p>`;
     }
 
     // Mostrar margem com color change
-    if (margem >= 0) {
+    if (lucro === 0) {
         margemBox.className = "p-4 rounded-md bg-green-500 text-green-100";
-        margemBox.innerHTML = `<p><strong>Margem:</strong> ${margem.toFixed(2)}%</p>`;
+        margemBox.innerHTML = `<p><strong>Margem:</strong> 0%</p>`;
+    } else if (margem >= 0) {
+        margemBox.className = "p-4 rounded-md bg-green-500 text-green-100";
+        margemBox.innerHTML = `<p><strong>Margem:</strong> +${margem.toFixed(2)}%</p>`;
     } else {
         margemBox.className = "p-4 rounded-md bg-red-500 text-red-100";
         margemBox.innerHTML = `<p><strong>Margem:</strong> ${margem.toFixed(2)}%</p>`;
     }
 
+    //BOXES
     // Mostrar ROI
     roiBox.className = "p-4 rounded-md bg-purple-600 text-purple-100";
     roiBox.innerHTML = `<p><strong>ROI:</strong> ${roi.toFixed(2)}%</p>`;
