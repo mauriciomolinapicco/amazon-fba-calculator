@@ -15,52 +15,121 @@
             <!-- Inputs en una línea -->
             <div class="space-y-4">
                 <div class="flex items-center justify-between">
-                    <label for="precoVenda" class="text-gray-300 text-sm">Preço de Venda (R$):</label>
-                    <input type="number" id="precoVenda" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                    <label for="precoVenda" class="text-gray-300">Preço de Venda (R$):</label>
+                    <input type="number" id="precoVenda" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
                 </div>
                 <div class="flex items-center justify-between">
-                    <label for="precoCompra" class="text-gray-300 text-sm">Preço de Compra (R$):</label>
-                    <input type="number" id="precoCompra" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                    <label for="precoCompra" class="text-gray-300">Preço de Compra (R$):</label>
+                    <input type="number" id="precoCompra" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
                 </div>
                 <div class="flex items-center justify-between">
-                    <label for="impostoCompra" class="text-gray-300 text-sm">Imposto da Compra (%):</label>
-                    <input type="number" id="impostoCompra" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                    <label for="impostoCompra" class="text-gray-300">Imposto da Compra (%):</label>
+                    <input type="number" id="impostoCompra" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
                 </div>
                 <div class="flex items-center justify-between">
-                    <label for="impostoVenda" class="text-gray-300 text-sm">Imposto da Venda (%):</label>
-                    <input type="number" id="impostoVenda" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                    <label for="impostoVenda" class="text-gray-300">Imposto da Venda (%):</label>
+                    <input type="number" id="impostoVenda" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
                 </div>
                 <div class="flex items-center justify-between">
-                    <label for="cupomDesconto" class="text-gray-300 text-sm">Cupom de Desconto (%):</label>
-                    <input type="number" id="cupomDesconto" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                    <label for="cupomDesconto" class="text-gray-300">Cupom de Desconto (%):</label>
+                    <input type="number" id="cupomDesconto" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
                 </div>
                 <div class="flex items-center justify-between">
-                    <label for="custoEnvio" class="text-gray-300 text-sm">Custo de Envio (R$):</label>
-                    <input type="number" id="custoEnvio" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                    <label for="custoEnvio" class="text-gray-300">Custo de Envio (R$):</label>
+                    <input type="number" id="custoEnvio" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
                 </div>
                 <div class="flex items-center justify-between">
-                    <label for="outrosCustos" class="text-gray-300 text-sm">Outros Custos (R$):</label>
-                    <input type="number" id="outrosCustos" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                    <label for="outrosCustos" class="text-gray-300">Outros Custos (R$):</label>
+                    <input type="number" id="outrosCustos" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
                 </div>
                 <div class="flex items-center justify-between">
-                    <label for="custoArmazenamento" class="text-gray-300 text-sm">Custo de Armazenamento (R$):</label>
-                    <input type="number" id="custoArmazenamento" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                    <label for="custoArmazenamento" class="text-gray-300">Custo de Armazenamento (R$):</label>
+                    <input type="number" id="custoArmazenamento" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
                 </div>
+                <div class="flex items-center justify-between">
+                    <label for="taxaFBA" class="text-gray-300">Taxa FBA (%):</label>
+                    <input type="number" value="14" id="taxaFBA" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                </div>
+                <div class="flex items-center justify-between">
+                    <label for="categoria" class="text-gray-300">Categoria do produtp</label>
+                    <select id="categoria" class="w-1/3 border bg-gray-700 p-1 rounded-md border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                        <option value="">Selecione uma categoria</option>
+                        <option value="Acessórios para dispositivos Amazon">Acessórios para dispositivos Amazon</option>
+                        <option value="Eletrodomésticos - Compactos até $300">Eletrodomésticos - Compactos até $300</option>
+                        <option value="Eletrodomésticos - Compactos acima de $300">Eletrodomésticos - Compactos acima de $300</option>
+                        <option value="Eletrodomésticos - Grandes">Eletrodomésticos - Grandes</option>
+                        <option value="Automotivo e Motocicletas">Automotivo e Motocicletas</option>
+                        <option value="Ferramentas elétricas de equipamento básico">Ferramentas elétricas de equipamento básico</option>
+                        <option value="Produtos para bebês até $10">Produtos para bebês até $10</option>
+                        <option value="Produtos para bebês acima de $10">Produtos para bebês acima de $10</option>
+                        <option value="Mochilas, bolsas e bagagens">Mochilas, bolsas e bagagens</option>
+                        <option value="Beleza, Saúde e Cuidados pessoais até $10">Beleza, Saúde e Cuidados pessoais até $10</option>
+                        <option value="Beleza, Saúde e Cuidados pessoais acima de $10">Beleza, Saúde e Cuidados pessoais acima de $10</option>
+                        <option value="Suprimentos de Indústria, Empresa e Ciência">Suprimentos de Indústria, Empresa e Ciência</option>
+                        <option value="Roupas e Acessórios até $15">Roupas e Acessórios até $15</option>
+                        <option value="Roupas e Acessórios entre $15 e $20">Roupas e Acessórios entre $15 e $20</option>
+                        <option value="Roupas e Acessórios acima de $20">Roupas e Acessórios acima de $20</option>
+                        <option value="Computadores">Computadores</option>
+                        <option value="Eletrônicos 2">Eletrônicos 2</option>
+                        <option value="Acessórios para eletrônicos 3 até $100">Acessórios para eletrônicos 3 até $100</option>
+                        <option value="Acessórios para eletrônicos 3 acima de $100">Acessórios para eletrônicos 3 acima de $100</option>
+                        <option value="Óculos e acessórios">Óculos e acessórios</option>
+                        <option value="Arte até $100">Arte até $100</option>
+                        <option value="Arte entre $100 e $1000">Arte entre $100 e $1000</option>
+                        <option value="Arte entre $1000 e $5000">Arte entre $1000 e $5000</option>
+                        <option value="Arte acima de $5000">Arte acima de $5000</option>
+                        <option value="Calçados">Calçados</option>
+                        <option value="Móveis até $200">Móveis até $200</option>
+                        <option value="Móveis acima de $200">Móveis acima de $200</option>
+                        <option value="Cartões de presente">Cartões de presente</option>
+                        <option value="Alimentos até $15">Alimentos até $15</option>
+                        <option value="Alimentos acima de $15">Alimentos acima de $15</option>
+                        <option value="Casa e cozinha">Casa e cozinha</option>
+                        <option value="Joias até $250">Joias até $250</option>
+                        <option value="Joias acima de $250">Joias acima de $250</option>
+                        <option value="Jardim">Jardim</option>
+                        <option value="Cortadores de grama e sopradores de neve até $500">Cortadores de grama e sopradores de neve até $500</option>
+                        <option value="Cortadores de grama e sopradores de neve acima de $500">Cortadores de grama e sopradores de neve acima de $500</option>
+                        <option value="Colchões">Colchões</option>
+                        <option value="Multimídia: Livros, DVD, Música, Software e Vídeo">Multimídia: Livros, DVD, Música, Software e Vídeo</option>
+                        <option value="Serviços gerenciados pelo vendedor">Serviços gerenciados pelo vendedor</option>
+                        <option value="Instrumentos musicais e Produção audiovisual">Instrumentos musicais e Produção audiovisual</option>
+                        <option value="Escritório e papelaria">Escritório e papelaria</option>
+                        <option value="Animais de estimação">Animais de estimação</option>
+                        <option value="Esportes e Ar livre">Esportes e Ar livre</option>
+                        <option value="Pneus">Pneus</option>
+                        <option value="Ferramentas e Melhorias para casa">Ferramentas e Melhorias para casa</option>
+                        <option value="Brinquedos e Jogos">Brinquedos e Jogos</option>
+                        <option value="Video games e Acessórios para video games">Video games e Acessórios para video games</option>
+                        <option value="Consoles de video game">Consoles de video game</option>
+                        <option value="Relógios até $1500">Relógios até $1500</option>
+                        <option value="Relógios acima de $1500">Relógios acima de $1500</option>
+                        <option value="Outros">Outros</option>
+                      </select>
+                    
+                </div>
+
             </div>
         </form>
 
         <!-- Comissões FBA e Referal Fee -->
         <div id="comissoes" class="mt-4 space-y-4">
             <!-- <h3 class="text-lg font-semibold text-center text-gray-300">Comissões</h3> -->
-            <div id="comissaoFBA" class="p-1 bg-gray-700 text-gray-300 rounded-md">Comissão FBA (14%):</div>
-            <div id="referalFee" class="p-1 bg-gray-700 text-gray-300 rounded-md">Referal Fee (13.33%):</div>
+            <div class="flex items-center justify-between">
+                <label for="comissaoFBA" class="text-gray-300 italic">Commissao FBA</label>
+                <div id="comissaoFBA" value="14" type="number" class="w-1/3 rounded-md bg-gray-700 border-purple-600 focus:outline-none text-white text-right p-1">-</div>
+            </div>
+            <div class="flex items-center justify-between">
+                <label for="referalFee" class="text-gray-300 italic">Referal Fee (depende da categoria):</label>
+                <div id="referalFee" class="w-1/3 rounded-md bg-gray-700 border-purple-600 focus:outline-none text-white text-right p-1">-</div>
+            </div>
         </div>
 
         <!-- Resultados -->
         <div id="resultados" class="mt-8">
             <div class="flex space-x-4">
                 <div id="lucroBox" class="p-4 rounded-md w-1/3 bg-green-600 font-bold">Lucro</div>
-                <div id="margemBox" class="p-4 rounded-md w-1/3 bg-green-500 font-bold">Margem</div>
+                <div id="margemBox" class="p-4 rounded-md w-1/3 bg-green-600 font-bold">Margem</div>
                 <div id="roiBox" class="p-4 rounded-md w-1/3 bg-purple-600 font-bold">ROI</div>
             </div>
         </div>
@@ -92,15 +161,25 @@
         </div>
 
         <hr class="my-4">
-        <div class="space-y-3">
-            <div class="flex items-center justify-between">
+        <div class="space-y-1">
+            <div class="flex items-center justify-between mb-2">
                 <label for="quantidadeCompra" class="text-gray-300 text-sm">Quantidade de compra:</label>
-                <input type="number" value="1" id="quantidadeCompra" class="w-1/3 border-b-2 bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
+                <input type="number" value="1" id="quantidadeCompra" class="w-1/3 border-b bg-transparent border-purple-600 focus:border-red-400 focus:outline-none border-gray-600 text-white text-right">
             </div>
             <div class="flex items-center justify-between">
-                <label for="investimento" class="text-gray-300 text-sm">Investimento (R$):</label>
+                <label for="investimento" class="text-gray-300 text-sm">Investimento estimado:</label>
                 <div id="investimento" class="w-1/3 rounded-md bg-gray-700 border-purple-600 focus:outline-none text-white text-right p-1">0</div>
             </div>
+            <div class="flex items-center justify-between">
+                <label for="lucroEstimado" class="text-gray-300 text-sm">Lucro estimado:</label>
+                <div id="lucroEstimado" class="w-1/3 rounded-md bg-gray-700 border-purple-600 focus:outline-none text-white text-right p-1">0</div>
+            </div>
+            <div class="flex items-center justify-between">
+                <label for="receitaEstimada" class="text-gray-300 text-sm">Receita estimada:</label>
+                <div id="receitaEstimada" class="w-1/3 rounded-md bg-gray-700 border-purple-600 focus:outline-none text-white text-right p-1">0</div>
+            </div>
+
+
 
         </div>
 
