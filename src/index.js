@@ -184,5 +184,5 @@ function calcularLucro() {
     comissaoFBABox.innerHTML = `R$ ${comissaoFBA.toFixed(2)}`;
     
     // Mostrar referal fee
-    referalFeeBox.innerHTML = `R$ ${referalFee.toFixed(2)}`;
+    referalFeeBox.innerHTML = `R$ ${referalFee.toFixed(2)} (${impostoReferalFee * 100}%)`;
 }
