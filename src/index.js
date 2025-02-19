@@ -137,8 +137,15 @@ function calcularLucro() {
     const precoBreakEvenBox = document.querySelector('#precoBreakEven');
     precoBreakEvenBox.innerHTML = 'R$ ' + precoBreakEven.toFixed(2);
 
-    //Investimento, lucro e receita estimada
-    const investimento = custosTotais * quantidadeCompra;
+    //Investimento, 
+    const custosTotaisParaInvestimento = precoCompra + 
+        (precoCompra * impostoCompra / 100) + 
+        custoEnvio + 
+        outrosCustos + 
+        custoArmazenamento
+
+    // lucro e receita estimada
+    const investimento = custosTotaisParaInvestimento * quantidadeCompra;
     document.getElementById('investimento').innerHTML = 'R$ ' + investimento.toFixed(2);
     const lucroEstimado = lucro * quantidadeCompra;
     document.getElementById('lucroEstimado').innerHTML = 'R$ ' + lucroEstimado.toFixed(2);
